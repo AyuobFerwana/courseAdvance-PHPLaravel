@@ -9,10 +9,15 @@
             <th></th>
             <th></th>
             <th>Content</th>
+            <th>Status</th>
+            <th>show</th>
+            <th>Deleted</th>
+
             <th>Created</th>
             <th>Updated</th>
             {{-- <th>the_time_ofDeleted</th> --}}
-            <th>Deleted</th>
+
+            <th>forceDeleted</th>
 
             <th>Action</th>
             <th></th>
@@ -40,6 +45,9 @@
             <td></td>
 
             <td>{{ $data->content }}</td>
+            <td>{{ $data->status }}</td>
+            <td>{{ $data->show ==1? 'show': 'hide' }}</td>
+
             <td></td>
             <td>{{ $data->created_at }}</td>
             <td>{{ $data->updated_at}}</td>

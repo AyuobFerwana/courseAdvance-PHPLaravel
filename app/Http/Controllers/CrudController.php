@@ -36,9 +36,16 @@ class CrudController extends Controller
      */
     public function store(Request $request)
     {
-      $data=  $request->validate([
-            'name'=>'required|string',
-            'content'=>'required|string'
+        $data =  $request->validate([
+            'name' => 'required|string',
+            'content' => 'required|string',
+            'status' => 'required|in:enable,disable',
+            'show' => 'required|in:1,0',
+        ], [
+            'name' => 'Title',
+            'content' => 'Content Data',
+            'status' => 'Status data',
+            'show' => 'Show Data',
         ]);
         Test::create($data);
         return redirect('res');
@@ -69,12 +76,16 @@ class CrudController extends Controller
     public function update(Request $request, string $id)
     {
         // $request->only($this->columns)
-        $data  = $request->validate([
-            'name'=>'required|string',
-            'content'=>'required|string'
-        ] , [
-            'name'=>'errorNameRequired',
-            'content'=>'content Data'
+        $data =  $request->validate([
+            'name' => 'required|string',
+            'content' => 'required|string',
+            'status' => 'required|in:enable,disable',
+            'show' => 'required|in:1,0',
+        ], [
+            'name' => 'Title',
+            'content' => 'Content Data',
+            'status' => 'Status data',
+            'show' => 'Show Data',
         ]);
         Test::where('id', $id)->update($data);
         return redirect('res');

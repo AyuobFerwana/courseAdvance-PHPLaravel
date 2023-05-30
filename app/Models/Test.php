@@ -12,7 +12,9 @@ class Test extends Model
     // const DELETED_AT = 'deleted_at';
     protected $fillable=[
         'name',
-        'content'
+        'content',
+        'status',
+        'show',
     ];
 
     public function getCreatedAtAttribute($value){

@@ -1,3 +1,5 @@
+{{ $ayuob }}
+
 <p>{{ $test->id }}</p>
 <p>{{ $test->name }}</p>
 <p>{{ $test->content }}</p>
