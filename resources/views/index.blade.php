@@ -1,3 +1,6 @@
+
+@convUnix(time()) <br>
+<hr>
 <table>
     <thead>
         <tr>
@@ -8,7 +11,9 @@
             <th>Content</th>
             <th>Created</th>
             <th>Updated</th>
+            {{-- <th>the_time_ofDeleted</th> --}}
             <th>Deleted</th>
+
             <th>Action</th>
             <th></th>
             <th>Show</th>
@@ -24,7 +29,10 @@
     </thead>
 
     <tbody>
-        <a href="{{ route('res.create') }}">Create</a>
+        <a href="res/create">Create</a> &nbsp; &nbsp;&nbsp;
+        <a href="res">withOut Trashed</a>&nbsp;&nbsp;&nbsp;
+        <a href="res?trashed=yes">Trashed</a>
+
         @foreach ($test as $data)
         <tr>
             <td>{{ $loop->iteration }}</td>
@@ -35,6 +43,7 @@
             <td></td>
             <td>{{ $data->created_at }}</td>
             <td>{{ $data->updated_at}}</td>
+            {{-- <td>{{ $data->the_time_ofDeleted }}</td> --}}
             <td>{{ $data->deleted_at }}</td>
 
 
@@ -50,14 +59,23 @@
                 </form>
 
             </td>
-<td></td>
-<td></td>
+            <td></td>
+            <td></td>
 
             <td>
                 <form action="{{ route('res.force', $data->id) }}" method="POST">
                     @csrf
                     @method('delete')
-                    <input type="submit" value="Delete">
+                    <input type="submit" value="Force Delete">
+                </form>
+
+            </td>
+
+
+            <td>
+                <form action="{{ route('res.restore', $data->id) }}" method="POST">
+                    @csrf
+                    <input type="submit" value="Restore">
                 </form>
 
             </td>

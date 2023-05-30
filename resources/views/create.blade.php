@@ -10,10 +10,22 @@
 
 <body>
     <div>
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         <form action="{{ route('res.store') }}" method="POST">
             @csrf
-            <input type="text" placeholder="Name" name="name"> <br><br>
-            <textarea name="content" placeholder="Content"></textarea><br>
+            <input type="text" placeholder="Name" name="name"><br>
+<hr>
+            <textarea name="content" placeholder="Content"></textarea>
+
             <input type="submit" value="Create" name="but">
         </form>
     </div>

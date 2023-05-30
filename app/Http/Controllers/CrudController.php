@@ -14,7 +14,12 @@ class CrudController extends Controller
      */
     public function index()
     {
-        $test = Test::withTrashed()->get();
+        if (request('trashed') == 'yes') {
+
+            $test = Test::withTrashed()->get();
+        } else {
+            $test = Test::get();
+        }
         return response()->view('index', compact('test'));
     }
 
@@ -31,7 +36,11 @@ class CrudController extends Controller
      */
     public function store(Request $request)
     {
-        Test::create($request->only($this->columns));
+      $data=  $request->validate([
+            'name'=>'required|string',
+            'content'=>'required|string'
+        ]);
+        Test::create($data);
         return redirect('res');
     }
 
@@ -59,8 +68,15 @@ class CrudController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //  dd($request->only($this->columns));
-        Test::where('id', $id)->update($request->only($this->columns));
+        // $request->only($this->columns)
+        $data  = $request->validate([
+            'name'=>'required|string',
+            'content'=>'required|string'
+        ] , [
+            'name'=>'errorNameRequired',
+            'content'=>'content Data'
+        ]);
+        Test::where('id', $id)->update($data);
         return redirect('res');
     }
 
@@ -78,6 +94,12 @@ class CrudController extends Controller
     {
         $test = Test::withTrashed()->findOrFail($id);
         $test->forceDelete();
+        return redirect('res');
+    }
+
+    public function restore(string $id)
+    {
+        $test = Test::where('id', $id)->restore();
         return redirect('res');
     }
 }

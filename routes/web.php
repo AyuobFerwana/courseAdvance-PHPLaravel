@@ -24,6 +24,8 @@ enum Section: string
 
 Route::resource('/res' , CrudController::class);
 Route::delete('res/force/delete/{id}','CrudController@force')->name('res.force');
+Route::post('res/restore/{id}','CrudController@restore')->name('res.restore');
+
 
 
 // CrudController
