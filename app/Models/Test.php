@@ -8,20 +8,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Test extends Model
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory, SoftDeletes;
     // const DELETED_AT = 'deleted_at';
-    protected $fillable=[
+    protected $fillable = [
         'name',
         'content',
         'status',
         'show',
     ];
 
-    public function getCreatedAtAttribute($value){
-        return date('d-m / h:i' , strtotime($value));
+    public function getCreatedAtAttribute($value)
+    {
+        return date('d-m / h:i', strtotime($value));
     }
 
-    public function getUpdatedAtAttribute($value){
-        return date('D:m \ H:i' , strtotime($value));
+    public function getUpdatedAtAttribute($value)
+    {
+        return date('D:m \ H:i', strtotime($value));
     }
 }
