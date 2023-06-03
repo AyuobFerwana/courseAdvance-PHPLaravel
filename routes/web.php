@@ -163,3 +163,9 @@ Route::post('res/restore/{id}','CrudController@restore')->name('res.restore');
 // Route::match(['post' , 'get' , 'options' ,'put'],'opt' ,function (){
 //    return '<h1>hello  match blade</h1>';
 // });
+
+Auth::routes([
+    'verify'=>true
+]);
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
